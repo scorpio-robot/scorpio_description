@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<sdf version="1.7">
+  <!-- Front wheels with steering capability -->
+  <xmacro_define_block name="front_steering_wheel_l" params="prefix parent pose">
+    <joint name="${prefix}_steering_joint" type="revolute">
+      <pose relative_to="${parent}">${pose}</pose>
+      <parent>${parent}</parent>
+      <child>${prefix}_steering_link</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-${pi/6}</lower>
+          <upper>${pi/6}</upper>
+          <effort>1000</effort>
+          <velocity>10</velocity>
+        </limit>
+      </axis>
+      <dynamics damping="0.2" />
+    </joint>
+
+    <link name="${prefix}_steering_link">
+      <pose relative_to="${prefix}_steering_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <xmacro_block name="inertia_sphere" m="1e-9" r="1e-9" />
+      </inertial>
+    </link>
+
+    <joint name="${prefix}_wheel_joint" type="revolute">
+      <pose relative_to="${prefix}_steering_link">0 0 0 0 0 0</pose>
+      <parent>${prefix}_steering_link</parent>
+      <child>${prefix}_wheel</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-1.79769e+308</lower>
+          <upper>1.79769e+308</upper>
+          <effort>1e+10</effort>
+          <velocity>1e+10</velocity>
+        </limit>
+      </axis>
+      <dynamics damping="0.2" />
+    </joint>
+
+    <link name="${prefix}_wheel">
+      <pose relative_to="${prefix}_wheel_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 ${pi/2} 0 0</pose>
+        <xmacro_block name="inertia_cylinder" m="0.2" r="0.054" l="0.04" />
+      </inertial>
+      <visual name="${prefix}_wheel_visual">
+        <xmacro_block name="geometry_mesh" uri="model://scorpio/meshes/left_wheel.stl" />
+        <material>
+          <ambient>0.1 0.1 0.1</ambient>
+          <diffuse>0.05 0.05 0.05</diffuse>
+          <specular>0.6 0.6 0.6</specular>
+        </material>
+      </visual>
+      <collision name="${prefix}_wheel_collision">
+        <pose>0 0 0 ${pi/2} 0 0</pose>
+        <xmacro_block name="geometry_cylinder" r="0.054" l="0.04" />
+      </collision>
+    </link>
+  </xmacro_define_block>
+
+  <xmacro_define_block name="front_steering_wheel_r" params="prefix parent pose">
+    <joint name="${prefix}_steering_joint" type="revolute">
+      <pose relative_to="${parent}">${pose}</pose>
+      <parent>${parent}</parent>
+      <child>${prefix}_steering_link</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-${pi/6}</lower>
+          <upper>${pi/6}</upper>
+          <effort>1000</effort>
+          <velocity>10</velocity>
+        </limit>
+      </axis>
+      <dynamics damping="0.2" />
+    </joint>
+
+    <link name="${prefix}_steering_link">
+      <pose relative_to="${prefix}_steering_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <xmacro_block name="inertia_sphere" m="1e-9" r="1e-9" />
+      </inertial>
+    </link>
+
+    <joint name="${prefix}_wheel_joint" type="revolute">
+      <pose relative_to="${prefix}_steering_link">0 0 0 0 0 0</pose>
+      <parent>${prefix}_steering_link</parent>
+      <child>${prefix}_wheel</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-1.79769e+308</lower>
+          <upper>1.79769e+308</upper>
+          <effort>1e+10</effort>
+          <velocity>1e+10</velocity>
+        </limit>
+      </axis>
+      <dynamics damping="0.2" />
+    </joint>
+
+    <link name="${prefix}_wheel">
+      <pose relative_to="${prefix}_wheel_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 ${pi/2} 0 0</pose>
+        <xmacro_block name="inertia_cylinder" m="0.2" r="0.054" l="0.04" />
+      </inertial>
+      <visual name="${prefix}_wheel_visual">
+        <xmacro_block name="geometry_mesh" uri="model://scorpio/meshes/right_wheel.stl" />
+        <material>
+          <ambient>0.1 0.1 0.1</ambient>
+          <diffuse>0.05 0.05 0.05</diffuse>
+          <specular>0.6 0.6 0.6</specular>
+        </material>
+      </visual>
+      <collision name="${prefix}_wheel_collision">
+        <pose>0 0 0 ${pi/2} 0 0</pose>
+        <xmacro_block name="geometry_cylinder" r="0.054" l="0.04" />
+      </collision>
+    </link>
+  </xmacro_define_block>
+
+  <!-- Rear wheels (no steering, just drive) -->
+  <xmacro_define_block name="rear_wheel_l" params="prefix parent pose">
+    <joint name="${prefix}_wheel_joint" type="revolute">
+      <pose relative_to="${parent}">${pose}</pose>
+      <parent>${parent}</parent>
+      <child>${prefix}_wheel</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-1.79769e+308</lower>
+          <upper>1.79769e+308</upper>
+          <effort>1e+10</effort>
+          <velocity>1e+10</velocity>
+        </limit>
+      </axis>
+      <dynamics damping="0.2" />
+    </joint>
+    <link name="${prefix}_wheel">
+      <pose relative_to="${prefix}_wheel_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 ${pi/2} 0 0</pose>
+        <xmacro_block name="inertia_cylinder" m="0.2" r="0.054" l="0.04" />
+      </inertial>
+      <visual name="${prefix}_wheel_visual">
+        <xmacro_block name="geometry_mesh" uri="model://scorpio/meshes/left_wheel.stl" />
+        <material>
+          <ambient>0.1 0.1 0.1</ambient>
+          <diffuse>0.05 0.05 0.05</diffuse>
+          <specular>0.6 0.6 0.6</specular>
+        </material>
+      </visual>
+      <collision name="${prefix}_wheel_collision">
+        <pose>0 0 0 ${pi/2} 0 0</pose>
+        <xmacro_block name="geometry_cylinder" r="0.054" l="0.04" />
+      </collision>
+    </link>
+  </xmacro_define_block>
+
+  <xmacro_define_block name="rear_wheel_r" params="prefix parent pose">
+    <joint name="${prefix}_wheel_joint" type="revolute">
+      <pose relative_to="${parent}">${pose}</pose>
+      <parent>${parent}</parent>
+      <child>${prefix}_wheel</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-1.79769e+308</lower>
+          <upper>1.79769e+308</upper>
+          <effort>1e+10</effort>
+          <velocity>1e+10</velocity>
+        </limit>
+      </axis>
+      <dynamics damping="0.2" />
+    </joint>
+    <link name="${prefix}_wheel">
+      <pose relative_to="${prefix}_wheel_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 ${pi/2} 0 0</pose>
+        <xmacro_block name="inertia_cylinder" m="0.2" r="0.054" l="0.04" />
+      </inertial>
+      <visual name="${prefix}_wheel_visual">
+        <xmacro_block name="geometry_mesh" uri="model://scorpio/meshes/right_wheel.stl" />
+        <material>
+          <ambient>0.1 0.1 0.1</ambient>
+          <diffuse>0.05 0.05 0.05</diffuse>
+          <specular>0.6 0.6 0.6</specular>
+        </material>
+      </visual>
+      <collision name="${prefix}_wheel_collision">
+        <pose>0 0 0 ${pi/2} 0 0</pose>
+        <xmacro_block name="geometry_cylinder" r="0.054" l="0.04" />
+      </collision>
+    </link>
+  </xmacro_define_block>
+</sdf>
