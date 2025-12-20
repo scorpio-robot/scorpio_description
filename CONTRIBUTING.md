@@ -57,3 +57,7 @@ be under the Apache 2 License, as dictated by that
    the terms of any separate license agreement you may have executed
    with Licensor regarding such Contributions.
 ~~~
+
+[issues]: https://github.com/scorpio-robot/scorpio_description/issues
+[closed-issues]: https://github.com/scorpio-robot/scorpio_description/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aclosed%20
+[help-wanted]: https://github.com/scorpio-robot/scorpio_description/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22
