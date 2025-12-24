@@ -14,20 +14,13 @@
         <xmacro_block name="inertia_cylinder" m="0.005" r="0.04" l="0.04" />
       </inertial>
       <visual name="visual">
-        <pose>0.0 0.0 0.0 0 0 ${pi}</pose>
+        <pose>0.0 0.0 -0.022 0 0 ${pi}</pose>
         <geometry>
           <mesh>
             <uri>model://mid360/meshes/mid360.dae</uri>
           </mesh>
         </geometry>
       </visual>
-
-      <sensor name="${prefix}mid360_imu" type="imu">
-        <ignition_frame_id>${prefix}mid360</ignition_frame_id>
-        <always_on>1</always_on>
-        <update_rate>200</update_rate>
-        <visualize>true</visualize>
-      </sensor>
 
       <sensor name="${prefix}mid360_lidar" type="custom">
         <plugin filename="RGLServerPluginInstance" name="rgl::RGLServerPluginInstance">
@@ -73,6 +66,26 @@
           <stddev>0.01</stddev>
         </noise>
       </sensor> -->
+    </link>
+
+    <joint name="${prefix}mid360_to_imu" type="fixed">
+      <pose relative_to="${prefix}mid360">0.011 0.02329 -0.04412 0 0 0</pose>
+      <parent>${prefix}mid360</parent>
+      <child>${prefix}mid360_imu</child>
+    </joint>
+
+    <link name="${prefix}mid360_imu">
+      <pose relative_to="${prefix}mid360_to_imu">0 0 0 0 0 0</pose>
+      <inertial>
+        <xmacro_block name="inertia_sphere" m="1e-9" r="1e-9" />
+      </inertial>
+
+      <sensor name="${prefix}mid360_imu" type="imu">
+        <ignition_frame_id>${prefix}mid360_imu</ignition_frame_id>
+        <always_on>1</always_on>
+        <update_rate>200</update_rate>
+        <visualize>true</visualize>
+      </sensor>
     </link>
   </xmacro_define_block>
 
