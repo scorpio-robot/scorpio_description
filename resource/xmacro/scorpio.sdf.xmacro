@@ -31,6 +31,7 @@
       <parameters>${ros2_control_parameters_file_path}</parameters>
       <ros>
         <remapping>/ackermann_steering_controller/reference_unstamped:=/cmd_vel</remapping>
+        <remapping>/ackermann_steering_controller/reference:=/cmd_vel</remapping>
       </ros>
     </plugin>
 
