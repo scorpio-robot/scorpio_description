@@ -1,5 +1,9 @@
 # scorpio_description
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Build and Test](https://github.com/scorpio-robot/scorpio_description/actions/workflows/build_and_test.yml/badge.svg)](https://github.com/scorpio-robot/scorpio_description/actions/workflows/build_and_test.yml)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
+
 ## 1. Overview
 
 `scorpio_description` is a ROS2 package that provides the robot description for the Scorpio robot, including URDF (Unified Robot Description Format) and SDF (Simulation Description Format) files. This package supports both simulation environments (e.g., Gazebo) and real-world robot deployment.
