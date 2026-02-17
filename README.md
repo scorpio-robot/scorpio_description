@@ -19,7 +19,7 @@ Features:
 
 ### 2.1 Setup Environment
 
-Ubuntu 22.04: [ROS2 Humble](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html)
+Ubuntu 24.04: [ROS2 Jazzy](https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html)
 
 ### 2.2 Create Workspace
 

@@ -22,7 +22,7 @@
         <xmacro_block name="geometry_cylinder" r="0.04" l="0.04" />
       </collision>
       <sensor name="${prefix}ydlidar_g4" type="gpu_lidar">
-        <ignition_frame_id>${prefix}ydlidar_g4</ignition_frame_id>
+        <gz_frame_id>${prefix}ydlidar_g4</gz_frame_id>
         <pose>0 0 0 0 0 0</pose>
         <always_on>true</always_on>
         <visualize>${visualize}</visualize>
@@ -40,12 +40,12 @@
             <min>0.15</min>
             <max>12.0</max>
           </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+          </noise>
         </ray>
-        <noise>
-          <type>gaussian</type>
-          <mean>0.0</mean>
-          <stddev>0.01</stddev>
-        </noise>
       </sensor>
     </link>
   </xmacro_define_block>

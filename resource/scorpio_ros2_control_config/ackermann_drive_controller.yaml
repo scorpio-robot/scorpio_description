@@ -1,6 +1,6 @@
 controller_manager:
   ros__parameters:
-    update_rate: 100  # Hz
+    update_rate: 1000  # Hz (match Gazebo simulation period of 0.001s)
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
     ackermann_steering_controller:
@@ -9,14 +9,13 @@ controller_manager:
 ackermann_steering_controller:
   ros__parameters:
     wheelbase: 0.315
-    front_wheel_track: 0.1856
-    rear_wheel_track: 0.1856
-    front_wheels_radius: 0.054
-    rear_wheels_radius: 0.054
+    steering_track_width: 0.1856
+    traction_track_width: 0.1856
+    traction_wheels_radius: 0.054
     front_steering: true
     reference_timeout: 9999.0
-    rear_wheels_names: ['rear_right_wheel_joint', 'rear_left_wheel_joint']
-    front_wheels_names: ['front_right_steering_joint', 'front_left_steering_joint']
+    traction_joints_names: ['rear_right_wheel_joint', 'rear_left_wheel_joint']
+    steering_joints_names: ['front_right_steering_joint', 'front_left_steering_joint']
     use_stamped_vel: true
     open_loop: false
     velocity_rolling_window_size: 10

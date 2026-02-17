@@ -72,7 +72,7 @@
 				</geometry>
 			</collision>
 			<sensor name="simple_rplidar_a2" type="gpu_lidar">
-				<ignition_frame_id>simple_rplidar_a2</ignition_frame_id>
+				<gz_frame_id>simple_rplidar_a2</gz_frame_id>
 				<pose>0 0 0.03 0 0 0</pose>
 				<always_on>true</always_on>
 				<visualize>true</visualize>

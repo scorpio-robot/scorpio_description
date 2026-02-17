@@ -28,7 +28,7 @@ from launch_ros.actions import Node
 from launch_ros.descriptions import ParameterFile
 from nav2_common.launch import RewrittenYaml
 from sdformat_tools.urdf_generator import UrdfGenerator
-from xmacro.xmacro4sdf import XMLMacro4sdf
+from sdformat_tools.xmacro4sdf import XMLMacro4sdf
 
 
 def launch_setup(context: LaunchContext) -> list:
