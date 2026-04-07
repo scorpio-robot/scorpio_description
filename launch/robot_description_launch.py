@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 import os
 
 from ament_index_python.packages import get_package_share_directory
@@ -24,7 +23,7 @@ from launch.actions import (
 )
 from launch.conditions import IfCondition
 from launch.substitutions import LaunchConfiguration, TextSubstitution
-from launch_ros.actions import Node
+from launch_ros.actions import Node, SetParameter
 from launch_ros.descriptions import ParameterFile
 from nav2_common.launch import RewrittenYaml
 from sdformat_tools.urdf_generator import UrdfGenerator
@@ -55,14 +54,11 @@ def launch_setup(context: LaunchContext) -> list:
     urdf_generator.parse_from_sdf_string(robot_xml)
     robot_urdf_xml = urdf_generator.to_string()
 
-    # Create our own temporary YAML files that include substitutions
-    param_substitutions = {"use_sim_time": use_sim_time}
-
     configured_params = ParameterFile(
         RewrittenYaml(
             source_file=params_file,
             root_key=namespace,
-            param_rewrites=param_substitutions,
+            param_rewrites={},
             convert_types=True,
         ),
         allow_substs=True,
@@ -76,6 +72,7 @@ def launch_setup(context: LaunchContext) -> list:
 
     bringup_cmd_group = GroupAction(
         [
+            SetParameter("use_sim_time", use_sim_time),
             Node(
                 package="joint_state_publisher",
                 executable="joint_state_publisher",
@@ -134,7 +131,7 @@ def generate_launch_description():
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
         "use_sim_time",
-        default_value="False",
+        default_value="True",
         description="Use simulation (Gazebo) clock if true",
     )
 

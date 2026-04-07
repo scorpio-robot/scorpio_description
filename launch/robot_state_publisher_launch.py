@@ -24,7 +24,7 @@ from launch.actions import (
 )
 from launch.conditions import IfCondition
 from launch.substitutions import LaunchConfiguration, TextSubstitution
-from launch_ros.actions import Node
+from launch_ros.actions import Node, SetParameter
 from launch_ros.descriptions import ParameterFile
 from nav2_common.launch import RewrittenYaml
 from sdformat_tools.urdf_generator import UrdfGenerator
@@ -55,14 +55,11 @@ def launch_setup(context: LaunchContext) -> list:
     urdf_generator.parse_from_sdf_string(robot_xml)
     robot_urdf_xml = urdf_generator.to_string()
 
-    # Create our own temporary YAML files that include substitutions
-    param_substitutions = {"use_sim_time": use_sim_time}
-
     configured_params = ParameterFile(
         RewrittenYaml(
             source_file=params_file,
             root_key=namespace,
-            param_rewrites=param_substitutions,
+            param_rewrites={},
             convert_types=True,
         ),
         allow_substs=True,
@@ -76,6 +73,7 @@ def launch_setup(context: LaunchContext) -> list:
 
     bringup_cmd_group = GroupAction(
         [
+            SetParameter("use_sim_time", use_sim_time),
             Node(
                 package="robot_state_publisher",
                 executable="robot_state_publisher",
