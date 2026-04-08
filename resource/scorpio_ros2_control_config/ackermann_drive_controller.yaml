@@ -17,7 +17,8 @@ ackermann_steering_controller:
     traction_joints_names: ['rear_right_wheel_joint', 'rear_left_wheel_joint']
     steering_joints_names: ['front_right_steering_joint', 'front_left_steering_joint']
     use_stamped_vel: true
-    open_loop: false
+    open_loop: true
+    reduce_wheel_speed_until_steering_reached: true
     velocity_rolling_window_size: 10
     base_frame_id: base_footprint
     odom_frame_id: odom
