@@ -24,14 +24,9 @@
         <pose>${0+0.1575} 0 0 0 0 0</pose>
         <xmacro_block name="geometry_mesh" uri="model://scorpio/meshes/scorpio.stl" />
         <material>
-          <ambient>0.5 0.5 0.5</ambient>
-          <diffuse>0.7 0.7 0.7</diffuse>
-          <specular>0.9 0.9 0.9</specular>
-          <pbr>
-            <metal>
-              <albedo_map>model://scorpio/meshes/images/base.png</albedo_map>
-            </metal>
-          </pbr>
+          <ambient>0.6 0.6 0.6 1.0</ambient>
+          <diffuse>0.75 0.75 0.75 1.0</diffuse>
+          <specular>0.9 0.9 0.9 1.0</specular>
         </material>
       </visual>
 
